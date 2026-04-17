@@ -18,9 +18,9 @@ Une application React moderne pour rechercher et explorer des pays du monde enti
 - **React 19** avec TypeScript
 - **Vite** pour le build et le dev server
 - **TanStack Router** pour le routing client-side
+- **TanStack Store** pour la gestion d'état
 - **Tailwind CSS 4** pour le styling
 - **shadcn/ui** pour les composants UI
-- **Zustand** pour la gestion d'état
 - **Radix UI** pour les composants accessibles
 - **Lucide React** pour les icônes
 - **Motion** pour les animations
