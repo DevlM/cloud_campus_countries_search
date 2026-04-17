@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://your-username.github.io/countries-search",
+  "homepage": "https://devlm.github.io/cloud_campus_countries_search",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
