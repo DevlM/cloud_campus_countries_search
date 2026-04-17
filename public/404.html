@@ -7,11 +7,13 @@
       const segment = 1;
       const l = window.location;
       const path = l.pathname.slice(0, -1);
-      const site =
-        l.hostname === "localhost"
-          ? l.origin
-          : l.origin + "/cloud_campus_countries_search";
-      window.location.replace(site + path + l.search + l.hash);
+      const basePath = "/cloud_campus_countries_search";
+      const site = l.hostname === "localhost" ? l.origin : l.origin + basePath;
+
+      // Only redirect if the path doesn't already include the base path
+      if (!path.startsWith(basePath)) {
+        window.location.replace(site + path + l.search + l.hash);
+      }
     </script>
     <meta http-equiv="refresh" content="0; url=/" />
   </head>
