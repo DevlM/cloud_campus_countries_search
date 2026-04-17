@@ -1,7 +1,10 @@
 import { createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
-export const router = createRouter({ routeTree });
+export const router = createRouter({
+  routeTree,
+  basepath: "/cloud_campus_countries_search/",
+});
 
 declare module "@tanstack/react-router" {
   interface Register {
