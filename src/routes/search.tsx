@@ -2,7 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import type { Country } from "../types/country";
-import { addFavorite, removeFavorite, isFavorite } from "../store/favorites";
+import {
+  addFavorite,
+  removeFavorite,
+  useFavoritesStore,
+} from "../store/favorites";
 import {
   Select,
   SelectContent,
@@ -23,6 +27,7 @@ function Search() {
   const [error, setError] = useState("");
   const [regionFilter, setRegionFilter] = useState("all");
   const [codeFilter, setCodeFilter] = useState("");
+  const { favorites } = useFavoritesStore();
 
   // Load regions on mount
   useEffect(() => {
@@ -220,15 +225,19 @@ function Search() {
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      if (isFavorite(country.cca2)) {
+                      if (favorites.some((fav) => fav.cca2 === country.cca2)) {
                         removeFavorite(country.cca2);
                       } else {
                         addFavorite(country);
                       }
                     }}
-                    className="mt-3 w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition-colors"
+                    className={`mt-3 w-full text-white px-4 py-2 rounded-lg transition-colors ${
+                      favorites.some((fav) => fav.cca2 === country.cca2)
+                        ? "bg-red-600 hover:bg-red-500"
+                        : "bg-blue-600 hover:bg-blue-500"
+                    }`}
                   >
-                    {isFavorite(country.cca2)
+                    {favorites.some((fav) => fav.cca2 === country.cca2)
                       ? "Supprimer des favoris"
                       : "Ajouter aux favoris"}
                   </button>

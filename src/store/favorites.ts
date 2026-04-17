@@ -22,7 +22,9 @@ interface FavoritesStore {
 const loadFavoritesFromStorage = (): Country[] => {
   try {
     const stored = localStorage.getItem("favorites-storage");
-    return stored ? JSON.parse(stored) : [];
+    if (!stored) return [];
+    const parsed = JSON.parse(stored);
+    return Array.isArray(parsed) ? parsed : [];
   } catch {
     return [];
   }
@@ -38,10 +40,16 @@ export const favoritesStore = createStore<FavoritesStore>({
 
 export const addFavorite = (country: Country) => {
   favoritesStore.setState((state) => {
-    if (state.favorites.some((fav) => fav.cca2 === country.cca2)) {
+    const typedState = state as FavoritesStore;
+    if (!Array.isArray(typedState.favorites)) {
+      const newFavorites = [country];
+      saveFavoritesToStorage(newFavorites);
+      return { favorites: newFavorites };
+    }
+    if (typedState.favorites.some((fav) => fav.cca2 === country.cca2)) {
       return state;
     }
-    const newFavorites = [...state.favorites, country];
+    const newFavorites = [...typedState.favorites, country];
     saveFavoritesToStorage(newFavorites);
     return { favorites: newFavorites };
   });
@@ -49,14 +57,22 @@ export const addFavorite = (country: Country) => {
 
 export const removeFavorite = (cca2: string) => {
   favoritesStore.setState((state) => {
-    const newFavorites = state.favorites.filter((fav) => fav.cca2 !== cca2);
+    const typedState = state as FavoritesStore;
+    if (!Array.isArray(typedState.favorites)) {
+      saveFavoritesToStorage([]);
+      return { favorites: [] };
+    }
+    const newFavorites = typedState.favorites.filter(
+      (fav) => fav.cca2 !== cca2,
+    );
     saveFavoritesToStorage(newFavorites);
     return { favorites: newFavorites };
   });
 };
 
 export const isFavorite = (cca2: string): boolean => {
-  const state = favoritesStore.state;
+  const state = favoritesStore.state as FavoritesStore;
+  if (!Array.isArray(state.favorites)) return false;
   return state.favorites.some((fav) => fav.cca2 === cca2);
 };
 
