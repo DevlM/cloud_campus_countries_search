@@ -23,7 +23,13 @@
 
     /* Strict Mode */
     "strict": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+
+    /* Path Mapping */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src"]
 }
