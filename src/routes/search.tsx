@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import type { Country } from "../types/country";
-import { useFavoritesStore } from "../store/favorites";
+import { addFavorite, removeFavorite, isFavorite } from "../store/favorites";
 import {
   Select,
   SelectContent,
@@ -23,7 +23,6 @@ function Search() {
   const [error, setError] = useState("");
   const [regionFilter, setRegionFilter] = useState("all");
   const [codeFilter, setCodeFilter] = useState("");
-  const { addFavorite, removeFavorite, isFavorite } = useFavoritesStore();
 
   // Load regions on mount
   useEffect(() => {

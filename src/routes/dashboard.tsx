@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { useFavoritesStore } from "../store/favorites";
+import { useFavoritesStore, removeFavorite } from "../store/favorites";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
 });
 
 function Dashboard() {
-  const { favorites, removeFavorite } = useFavoritesStore();
+  const { favorites } = useFavoritesStore();
 
   return (
     <div>

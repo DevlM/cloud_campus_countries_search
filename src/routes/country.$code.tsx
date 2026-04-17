@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import type { Country } from "../types/country";
-import { useFavoritesStore } from "../store/favorites";
+import { addFavorite, removeFavorite, isFavorite } from "../store/favorites";
 
 export const Route = createFileRoute("/country/$code")({
   component: CountryDetail,
@@ -12,7 +12,6 @@ function CountryDetail() {
   const [country, setCountry] = useState<Country | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const { addFavorite, removeFavorite, isFavorite } = useFavoritesStore();
 
   useEffect(() => {
     const fetchCountry = async () => {
