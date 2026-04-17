@@ -63,7 +63,7 @@ Le workflow `.github/workflows/deploy.yml` se déclenche automatiquement à chaq
 ## 📁 Structure du Projet
 
 ```
-countries-search/
+cloud_campus_countries_search/
 ├── public/
 │   ├── 404.html         # Page 404 pour GitHub Pages
 │   ├── favicon.svg
