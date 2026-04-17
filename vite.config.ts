@@ -6,7 +6,7 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/countries-search/",
+  base: "/cloud_campus_countries_search/",
   plugins: [
     tanstackRouter({
       target: "react",
